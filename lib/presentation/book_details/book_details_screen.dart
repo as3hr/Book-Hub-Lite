@@ -1,7 +1,11 @@
+import 'package:book_hub_lite/helpers/styles/app_color.dart';
 import 'package:book_hub_lite/presentation/book_details/book_details_cubit.dart';
 import 'package:book_hub_lite/presentation/book_details/book_details_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../di/service_locator.dart';
+import '../wishlist/wishlist_cubit.dart';
 
 class BookDetailsScreen extends StatelessWidget {
   const BookDetailsScreen({super.key, required this.cubit});
@@ -26,6 +30,16 @@ class BookDetailsScreen extends StatelessWidget {
                 actions: [
                   IconButton(
                     icon: const Icon(Icons.bookmark_border),
+                    onPressed: () {
+                      cubit.onAddToWishlistTap();
+                    },
+                    color:
+                        (sl<WishlistCubit>().state.books.contains(cubit.params))
+                            ? AppColor.primary
+                            : Colors.white,
+                  ),
+                  IconButton(
+                    icon: const Icon(Icons.add_shopping_cart),
                     onPressed: () {},
                     color: Colors.white,
                   ),

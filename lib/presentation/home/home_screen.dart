@@ -51,6 +51,10 @@ class HomeScreen extends StatelessWidget {
                         filled: true,
                         fillColor: Colors.grey[100],
                       ),
+                      onTapOutside: (_) {
+                        FocusScope.of(context).unfocus();
+                      },
+                      onChanged: (query) => homeCubit.searchBooks(query),
                     ),
                     const SizedBox(height: 24),
                     const Text(
@@ -61,20 +65,39 @@ class HomeScreen extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 16),
-                    Expanded(
-                      child: GridView.builder(
-                        gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
-                          childAspectRatio: 0.7,
-                        ),
-                        padding: const EdgeInsets.only(bottom: 80),
-                        itemCount: state.books.length,
-                        itemBuilder: (context, index) {
-                          return _buildBookCard(context, state.books[index]);
-                        },
+                    if (state.isSearchActive)
+                      Expanded(
+                        child: state.filteredBooks.isEmpty
+                            ? const Center(child: Text("No books found"))
+                            : GridView.builder(
+                                gridDelegate:
+                                    const SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 2,
+                                  childAspectRatio: 0.7,
+                                ),
+                                padding: const EdgeInsets.only(bottom: 80),
+                                itemCount: state.filteredBooks.length,
+                                itemBuilder: (context, index) {
+                                  return _buildBookCard(
+                                      context, state.filteredBooks[index]);
+                                },
+                              ),
                       ),
-                    ),
+                    if (!state.isSearchActive)
+                      Expanded(
+                        child: GridView.builder(
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                            childAspectRatio: 0.7,
+                          ),
+                          padding: const EdgeInsets.only(bottom: 80),
+                          itemCount: state.books.length,
+                          itemBuilder: (context, index) {
+                            return _buildBookCard(context, state.books[index]);
+                          },
+                        ),
+                      ),
                   ],
                 ),
               ),

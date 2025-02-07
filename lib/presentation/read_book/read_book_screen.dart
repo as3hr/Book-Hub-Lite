@@ -39,9 +39,15 @@ class ReadBookScreen extends StatelessWidget {
                   children: [
                     const Text('Font Size'),
                     Slider(
-                      value: state.fontSize / 20,
+                      value: (state.fontSize - ReadBookState.minFontSize) /
+                          (ReadBookState.maxFontSize -
+                              ReadBookState.minFontSize),
                       onChanged: (value) {
-                        cubit.changeFontSize(value * 20);
+                        double newSize = ReadBookState.minFontSize +
+                            value *
+                                (ReadBookState.maxFontSize -
+                                    ReadBookState.minFontSize);
+                        cubit.changeFontSize(newSize);
                       },
                     ),
                   ],

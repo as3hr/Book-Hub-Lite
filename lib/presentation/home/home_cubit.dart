@@ -16,4 +16,19 @@ class HomeCubit extends Cubit<HomeState> {
               emit(state.copyWith(isLoading: false, books: books));
             }));
   }
+
+  void searchBooks(String query) {
+    if (query.isEmpty) {
+      emit(state.copyWith(filteredBooks: state.books, isSearchActive: false));
+      return;
+    }
+
+    final filtered = state.books
+        .where((book) =>
+            book.title?.toLowerCase().contains(query.toLowerCase()) == true ||
+            book.author?.toLowerCase().contains(query.toLowerCase()) == true)
+        .toList();
+
+    emit(state.copyWith(filteredBooks: filtered, isSearchActive: true));
+  }
 }

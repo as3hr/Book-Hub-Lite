@@ -1,18 +1,30 @@
 import '../../domain/entities/book_entity.dart';
 
 class HomeState {
-  bool isLoading;
-  List<BookEntity> books;
+  final bool isLoading;
+  final List<BookEntity> books;
+  final List<BookEntity> filteredBooks;
+  final bool isSearchActive;
 
   HomeState({
     this.isLoading = true,
+    this.isSearchActive = false,
     required this.books,
+    required this.filteredBooks,
   });
 
-  factory HomeState.empty() => HomeState(books: []);
+  factory HomeState.empty() => HomeState(books: [], filteredBooks: []);
 
-  copyWith({bool? isLoading, List<BookEntity>? books}) => HomeState(
-        books: books ?? this.books,
-        isLoading: isLoading ?? this.isLoading,
-      );
+  HomeState copyWith(
+      {bool? isLoading,
+      bool? isSearchActive,
+      List<BookEntity>? books,
+      List<BookEntity>? filteredBooks}) {
+    return HomeState(
+      books: books ?? this.books,
+      isSearchActive: isSearchActive ?? this.isSearchActive,
+      filteredBooks: filteredBooks ?? this.filteredBooks,
+      isLoading: isLoading ?? this.isLoading,
+    );
+  }
 }

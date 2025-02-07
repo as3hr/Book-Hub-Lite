@@ -1,3 +1,5 @@
+import 'package:book_hub_lite/presentation/wishlist/wishlist_screen.dart';
+
 import '../../home/home_screen.dart';
 import 'package:flutter/material.dart';
 import '../../../helpers/styles/app_images.dart';
@@ -22,7 +24,7 @@ class BottomBarItem {
     ),
     BottomBarItem(
       image: AppImages.bookmark,
-      page: const HomeScreen(),
+      page: const WishlistScreen(),
     ),
   ];
 }
