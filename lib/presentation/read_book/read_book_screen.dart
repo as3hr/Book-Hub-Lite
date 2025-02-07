@@ -1,3 +1,4 @@
+import 'package:book_hub_lite/helpers/styles/app_color.dart';
 import 'package:book_hub_lite/presentation/read_book/read_book_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -17,24 +18,19 @@ class ReadBookScreen extends StatelessWidget {
           appBar: AppBar(
             backgroundColor: Colors.white,
             leading: IconButton(
-              icon: const Icon(Icons.arrow_back),
+              icon: const Icon(Icons.arrow_back_ios_new),
               onPressed: () => Navigator.pop(context),
             ),
             title: Text(state.book.title ?? ""),
-            actions: [
-              IconButton(
-                icon: const Icon(Icons.more_vert),
-                onPressed: () {},
-              ),
-            ],
           ),
           body: Padding(
             padding: const EdgeInsets.all(16.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                buildBookText(state.book.bookText),
-                const Spacer(),
+                Expanded(
+                    child: SingleChildScrollView(
+                        child: buildBookText(state.book.bookText))),
                 Column(
                   children: [
                     const Text('Font Size'),
@@ -49,6 +45,7 @@ class ReadBookScreen extends StatelessWidget {
                                     ReadBookState.minFontSize);
                         cubit.changeFontSize(newSize);
                       },
+                      activeColor: AppColor.primary,
                     ),
                   ],
                 ),

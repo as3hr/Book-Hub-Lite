@@ -32,11 +32,11 @@ Future<void> showToast(String message) async {
           insetAnimationDuration: const Duration(milliseconds: 500),
           elevation: 0,
           child: Align(
-            alignment: Alignment.bottomCenter,
+            alignment: Alignment.topCenter,
             child: Container(
               padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 5),
               decoration: BoxDecoration(
-                color: Colors.black,
+                color: AppColor.primary,
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Row(
@@ -48,6 +48,7 @@ Future<void> showToast(String message) async {
                       style: const TextStyle(
                         fontSize: 15,
                         color: Colors.white,
+                        fontWeight: FontWeight.bold,
                       ),
                       textAlign: TextAlign.center,
                     ),

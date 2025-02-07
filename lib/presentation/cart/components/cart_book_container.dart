@@ -1,10 +1,9 @@
 import 'package:book_hub_lite/domain/entities/book_entity.dart';
+import 'package:book_hub_lite/helpers/styles/app_color.dart';
 import 'package:flutter/material.dart';
 
-import '../../../helpers/styles/app_color.dart';
-
-class WishlistBookContainer extends StatelessWidget {
-  const WishlistBookContainer({
+class CartBookContainer extends StatelessWidget {
+  const CartBookContainer({
     super.key,
     required this.book,
     required this.onRemoveTap,
@@ -31,8 +30,8 @@ class WishlistBookContainer extends StatelessWidget {
         ],
       ),
       child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
+          // Book Cover
           ClipRRect(
             borderRadius: BorderRadius.circular(8),
             child: Image.asset(
@@ -43,6 +42,7 @@ class WishlistBookContainer extends StatelessWidget {
             ),
           ),
           const SizedBox(width: 12),
+          // Book Details
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -66,11 +66,21 @@ class WishlistBookContainer extends StatelessWidget {
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
+                const SizedBox(height: 4),
+                Text(
+                  "\$${book.price?.toStringAsFixed(2) ?? '0.00'}",
+                  style: const TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.green,
+                  ),
+                ),
               ],
             ),
           ),
+          // Remove Button
           IconButton(
-            icon: const Icon(Icons.delete, color: AppColor.primary),
+            icon: const Icon(Icons.remove_circle, color: AppColor.primary),
             onPressed: onRemoveTap,
           ),
         ],

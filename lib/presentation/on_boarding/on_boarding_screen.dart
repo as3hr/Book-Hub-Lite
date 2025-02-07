@@ -1,12 +1,16 @@
 import 'package:book_hub_lite/helpers/styles/app_color.dart';
 import 'package:book_hub_lite/helpers/styles/app_images.dart';
+import 'package:book_hub_lite/presentation/on_boarding/on_boarding_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../navigation/app_navigation.dart';
-import '../../navigation/route_name.dart';
+import '../../di/service_locator.dart';
+import 'on_boarding_state.dart';
 
 class OnboardingScreen extends StatelessWidget {
   const OnboardingScreen({super.key});
+
+  static final cubit = sl<OnBoardingCubit>();
 
   @override
   Widget build(BuildContext context) {
@@ -28,20 +32,24 @@ class OnboardingScreen extends StatelessWidget {
                 const SizedBox(height: 40),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 24),
-                  child: ElevatedButton(
-                    onPressed: () {
-                      final navigation = AppNavigation();
-                      navigation.push(RouteName.bottomBar);
+                  child: BlocBuilder<OnBoardingCubit, OnBoardingState>(
+                    bloc: cubit,
+                    builder: (context, state) {
+                      return ElevatedButton(
+                        onPressed: () {
+                          cubit.onGetInPressed();
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: AppColor.primary,
+                          foregroundColor: Colors.white,
+                          minimumSize: const Size(double.infinity, 50),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                        ),
+                        child: const Text('Get In'),
+                      );
                     },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColor.primary,
-                      foregroundColor: Colors.white,
-                      minimumSize: const Size(double.infinity, 50),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                    ),
-                    child: const Text('Sign Up'),
                   ),
                 ),
               ],

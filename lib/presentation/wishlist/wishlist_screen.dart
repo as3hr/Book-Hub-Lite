@@ -18,13 +18,8 @@ class WishlistScreen extends StatelessWidget {
       builder: (context, state) {
         return Scaffold(
           appBar: AppBar(
+            backgroundColor: Colors.white,
             title: const Text("Your Wishlist"),
-            actions: [
-              IconButton(
-                icon: const Icon(Icons.more_vert),
-                onPressed: () {},
-              ),
-            ],
           ),
           body: state.books.isEmpty
               ? const Center(child: Text('Your wishlist is empty!'))

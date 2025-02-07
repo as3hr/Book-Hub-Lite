@@ -6,6 +6,7 @@ import 'package:book_hub_lite/presentation/book_details/book_details_state.dart'
 import 'package:book_hub_lite/presentation/wishlist/wishlist_cubit.dart';
 
 import '../../di/service_locator.dart';
+import '../cart/cart_cubit.dart';
 
 class BookDetailsCubit extends Cubit<BookDetailsState> {
   final BookEntity params;
@@ -29,5 +30,15 @@ class BookDetailsCubit extends Cubit<BookDetailsState> {
       showToast('Book added to wishlist');
     }
     emit(state.copyWith(book: params));
+  }
+
+  void onAddToCartTap() {
+    final cartCubit = sl<CartCubit>();
+    if (cartCubit.state.books.contains(params)) {
+      showToast('Book already in cart');
+      return;
+    }
+    cartCubit.addBookToCart(params);
+    showToast('Book added to cart');
   }
 }

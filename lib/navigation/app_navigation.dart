@@ -44,4 +44,8 @@ class AppNavigation {
       }
     });
   }
+
+  getToLast() {
+    Navigator.popUntil(context, (route) => route.isFirst);
+  }
 }

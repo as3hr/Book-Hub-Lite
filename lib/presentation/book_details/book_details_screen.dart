@@ -1,4 +1,5 @@
 import 'package:book_hub_lite/helpers/styles/app_color.dart';
+import 'package:book_hub_lite/helpers/styles/app_images.dart';
 import 'package:book_hub_lite/presentation/book_details/book_details_cubit.dart';
 import 'package:book_hub_lite/presentation/book_details/book_details_state.dart';
 import 'package:flutter/material.dart';
@@ -23,13 +24,19 @@ class BookDetailsScreen extends StatelessWidget {
                 expandedHeight: 400,
                 pinned: true,
                 leading: IconButton(
-                  icon: const Icon(Icons.arrow_back),
+                  icon: const Icon(Icons.arrow_back_ios_new),
                   onPressed: () => Navigator.pop(context),
                   color: Colors.white,
                 ),
                 actions: [
                   IconButton(
-                    icon: const Icon(Icons.bookmark_border),
+                    icon:
+                        (sl<WishlistCubit>().state.books.contains(cubit.params))
+                            ? Image.asset(AppImages.bookmark2)
+                            : Image.asset(
+                                AppImages.bookmark,
+                                color: Colors.white,
+                              ),
                     onPressed: () {
                       cubit.onAddToWishlistTap();
                     },
@@ -37,11 +44,6 @@ class BookDetailsScreen extends StatelessWidget {
                         (sl<WishlistCubit>().state.books.contains(cubit.params))
                             ? AppColor.primary
                             : Colors.white,
-                  ),
-                  IconButton(
-                    icon: const Icon(Icons.add_shopping_cart),
-                    onPressed: () {},
-                    color: Colors.white,
                   ),
                 ],
                 flexibleSpace: FlexibleSpaceBar(
@@ -116,11 +118,18 @@ class BookDetailsScreen extends StatelessWidget {
                       Row(
                         children: [
                           Expanded(
-                            child: OutlinedButton(
-                              onPressed: () {},
+                            child: ElevatedButton(
+                              onPressed: () {
+                                cubit.navigator.navigateToReadBook(state.book);
+                              },
                               style: OutlinedButton.styleFrom(
                                 padding:
                                     const EdgeInsets.symmetric(vertical: 16),
+                                backgroundColor: AppColor.primary,
+                                foregroundColor: Colors.white,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
                               ),
                               child: const Text('Read Preview'),
                             ),
@@ -129,13 +138,16 @@ class BookDetailsScreen extends StatelessWidget {
                           Expanded(
                             child: ElevatedButton(
                               onPressed: () {
-                                cubit.navigator.navigateToReadBook(state.book);
+                                cubit.onAddToCartTap();
                               },
                               style: ElevatedButton.styleFrom(
                                 padding:
                                     const EdgeInsets.symmetric(vertical: 16),
-                                backgroundColor: Colors.blue,
+                                backgroundColor: Colors.black,
                                 foregroundColor: Colors.white,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
                               ),
                               child: Text(
                                   'Buy for \$${state.book.price?.toStringAsFixed(2) ?? "14.95"}'),

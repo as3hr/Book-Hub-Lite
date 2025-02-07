@@ -4,4 +4,6 @@ class RouteName {
   static const home = '/home';
   static const bookDetails = '/bookDetails';
   static const bookReader = '/bookReader';
+  static const checkout = '/checkout';
+  static const successOrder = '/succes-order';
 }
