@@ -1,9 +1,9 @@
-import 'package:book_hub_lite/navigation/route_name.dart';
 import 'package:book_hub_lite/presentation/book_details/book_details_navigator.dart';
+import 'package:book_hub_lite/presentation/cart/components/cart_navigator.dart';
 
 import '../../navigation/app_navigation.dart';
 
-class HomeNavigator with BookDetailRoute {
+class HomeNavigator with BookDetailRoute, CartROute {
   @override
   final AppNavigation navigation;
   HomeNavigator(this.navigation);
@@ -11,8 +11,4 @@ class HomeNavigator with BookDetailRoute {
 
 mixin HomeRoute {
   AppNavigation get navigation;
-
-  navigateToHome() {
-    navigation.push(RouteName.home);
-  }
 }

@@ -18,3 +18,11 @@ class CartNavigator {
     navigation.getToLast();
   }
 }
+
+mixin CartROute {
+  AppNavigation get navigation;
+
+  navigateToCart() {
+    navigation.push(RouteName.cart);
+  }
+}

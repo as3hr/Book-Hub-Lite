@@ -1,167 +1,37 @@
-import 'package:book_hub_lite/domain/entities/book_entity.dart';
-import 'package:book_hub_lite/helpers/styles/app_images.dart';
+import 'package:book_hub_lite/presentation/home/components/home_screen_body.dart';
+import 'package:book_hub_lite/presentation/home/components/home_screen_header.dart';
 import 'package:book_hub_lite/presentation/home/home_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../di/service_locator.dart';
-import '../../helpers/widgets/shadow_mask.dart';
+import '../cart/cart_cubit.dart';
 import 'home_cubit.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   static final homeCubit = sl<HomeCubit>();
+  static final cartCubit = sl<CartCubit>();
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<HomeCubit, HomeState>(
         bloc: homeCubit,
         builder: (context, state) {
-          return Scaffold(
+          return const Scaffold(
             body: SafeArea(
               child: Padding(
-                padding: const EdgeInsets.fromLTRB(5, 16, 5, 0),
+                padding: EdgeInsets.fromLTRB(5, 16, 5, 0),
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const SizedBox(height: 16),
-                    const Text(
-                      'Welcome back, Bunny!',
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: Colors.grey,
-                      ),
-                    ),
-                    const Text(
-                      'What do you want to\nread today?',
-                      style: TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    const SizedBox(height: 24),
-                    TextField(
-                      decoration: InputDecoration(
-                        hintText: 'Search',
-                        prefixIcon: const Icon(Icons.search),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                          borderSide: BorderSide.none,
-                        ),
-                        filled: true,
-                        fillColor: Colors.grey[100],
-                      ),
-                      onTapOutside: (_) {
-                        FocusScope.of(context).unfocus();
-                      },
-                      onChanged: (query) => homeCubit.searchBooks(query),
-                    ),
-                    const SizedBox(height: 24),
-                    const Text(
-                      'New Arrivals',
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    const SizedBox(height: 16),
-                    if (state.isSearchActive)
-                      Expanded(
-                        child: state.filteredBooks.isEmpty
-                            ? const Center(child: Text("No books found"))
-                            : ScrollShaderMask(
-                                child: GridView.builder(
-                                  gridDelegate:
-                                      const SliverGridDelegateWithFixedCrossAxisCount(
-                                    crossAxisCount: 2,
-                                    childAspectRatio: 0.7,
-                                  ),
-                                  shrinkWrap: true,
-                                  physics: const NeverScrollableScrollPhysics(),
-                                  padding: const EdgeInsets.only(bottom: 80),
-                                  itemCount: state.filteredBooks.length,
-                                  itemBuilder: (context, index) {
-                                    return _buildBookCard(
-                                        context, state.filteredBooks[index]);
-                                  },
-                                ),
-                              ),
-                      ),
-                    if (!state.isSearchActive)
-                      Expanded(
-                        child: ScrollShaderMask(
-                          child: GridView.builder(
-                            shrinkWrap: true,
-                            physics: const NeverScrollableScrollPhysics(),
-                            gridDelegate:
-                                const SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 2,
-                              childAspectRatio: 0.7,
-                            ),
-                            padding: const EdgeInsets.only(bottom: 80),
-                            itemCount: state.books.length,
-                            itemBuilder: (context, index) {
-                              return _buildBookCard(
-                                  context, state.books[index]);
-                            },
-                          ),
-                        ),
-                      ),
+                    HomeScreenHeader(),
+                    Expanded(child: HomeScreenBody()),
                   ],
                 ),
               ),
             ),
           );
         });
-  }
-
-  Widget _buildBookCard(
-    BuildContext context,
-    BookEntity book,
-  ) {
-    return GestureDetector(
-      onTap: () {
-        homeCubit.navigator.navigateToBookDetail(book);
-      },
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Expanded(
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(15),
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15),
-                    image: DecorationImage(
-                      image: AssetImage(book.image ?? AppImages.book1),
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            const SizedBox(height: 8),
-            Text(
-              book.title ?? '',
-              style: const TextStyle(
-                fontWeight: FontWeight.bold,
-              ),
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-            ),
-            Text(
-              book.author ?? "",
-              style: const TextStyle(
-                color: Colors.grey,
-                fontSize: 12,
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
   }
 }

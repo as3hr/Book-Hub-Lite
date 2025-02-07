@@ -1,4 +1,3 @@
-import 'package:book_hub_lite/presentation/cart/cart_screen.dart';
 import 'package:book_hub_lite/presentation/wishlist/wishlist_screen.dart';
 
 import '../../home/home_screen.dart';
@@ -18,10 +17,6 @@ class BottomBarItem {
     BottomBarItem(
       image: AppImages.home,
       page: const HomeScreen(),
-    ),
-    BottomBarItem(
-      image: AppImages.cart,
-      page: const CartScreen(),
     ),
     BottomBarItem(
       image: AppImages.bookmark,

@@ -2,6 +2,7 @@
 
 import 'package:book_hub_lite/navigation/route_name.dart';
 import 'package:book_hub_lite/presentation/bottom_bar/bottom_bar.dart';
+import 'package:book_hub_lite/presentation/cart/cart_screen.dart';
 import 'package:book_hub_lite/presentation/cart/components/checkout_screen.dart';
 import 'package:book_hub_lite/presentation/cart/components/order_success.dart';
 import 'package:book_hub_lite/presentation/on_boarding/on_boarding_screen.dart';
@@ -10,7 +11,6 @@ import 'package:flutter/material.dart';
 
 import '../di/service_locator.dart';
 import '../presentation/book_details/book_details_screen.dart';
-import '../presentation/home/home_screen.dart';
 
 enum TransitionType {
   fade,
@@ -28,15 +28,15 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case RouteName.bottomBar:
       return getRoute(BottomBar(cubit: sl()), TransitionType.fade);
 
+    case RouteName.cart:
+      return getRoute(const CartScreen(), TransitionType.fade);
+
     case RouteName.checkout:
       return getRoute(const CheckoutScreen(), TransitionType.fade);
 
     case RouteName.successOrder:
       return getRoute(
           OrderSuccessScreen(amount: args['amount']), TransitionType.fade);
-
-    case RouteName.home:
-      return getRoute(const HomeScreen(), TransitionType.fade);
 
     case RouteName.bookDetails:
       return getRoute(

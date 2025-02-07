@@ -46,6 +46,7 @@ class ReadBookScreen extends StatelessWidget {
                         cubit.changeFontSize(newSize);
                       },
                       activeColor: AppColor.primary,
+                      inactiveColor: AppColor.primary.withOpacity(0.5),
                     ),
                   ],
                 ),

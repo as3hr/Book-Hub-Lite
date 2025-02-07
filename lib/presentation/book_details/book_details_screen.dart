@@ -131,7 +131,17 @@ class BookDetailsScreen extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(10),
                                 ),
                               ),
-                              child: const Text('Read Preview'),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Image.asset(
+                                    AppImages.readBook,
+                                    color: Colors.white,
+                                  ),
+                                  const SizedBox(width: 10),
+                                  const Text('Read Preview'),
+                                ],
+                              ),
                             ),
                           ),
                           const SizedBox(width: 16),

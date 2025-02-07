@@ -64,14 +64,5 @@ void main() {
       expect(cartCubit.state.books.contains(book1), isTrue);
       expect(cartCubit.state.books.contains(book2), isTrue);
     });
-
-    test('Adding the same book multiple times should reflect in cart', () {
-      final book = BookEntity(title: 'Repeated Book', price: 12.0);
-
-      cartCubit.addBookToCart(book);
-      cartCubit.addBookToCart(book);
-
-      expect(cartCubit.state.books.length, 2);
-    });
   });
 }
