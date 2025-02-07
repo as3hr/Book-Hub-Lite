@@ -64,7 +64,9 @@ class HomeScreenBody extends StatelessWidget {
                     padding: const EdgeInsets.only(bottom: 80),
                     itemCount: state.books.length,
                     itemBuilder: (context, index) {
-                      return BookCard(book: state.books[index]);
+                      return BookCard(
+                        book: state.books[index],
+                      );
                     },
                   ),
                 ),

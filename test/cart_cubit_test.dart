@@ -1,7 +1,7 @@
 import 'package:book_hub_lite/domain/entities/book_entity.dart';
 import 'package:book_hub_lite/navigation/app_navigation.dart';
 import 'package:book_hub_lite/presentation/cart/cart_cubit.dart';
-import 'package:book_hub_lite/presentation/cart/components/cart_navigator.dart';
+import 'package:book_hub_lite/presentation/cart/cart_navigator.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 class FakeAppNavigation implements AppNavigation {
@@ -13,9 +13,6 @@ class FakeAppNavigation implements AppNavigation {
 
   @override
   pop() {}
-
-  @override
-  popAll(String routeName) {}
 
   @override
   void push(String routeName, {arguments}) {}

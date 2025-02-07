@@ -17,8 +17,7 @@ class CartScreen extends StatelessWidget {
     return BlocBuilder<CartCubit, CartState>(
       bloc: cartCubit,
       builder: (context, state) {
-        final totalPrice =
-            state.books.fold(0.0, (sum, book) => sum + (book.price ?? 0.0));
+        final totalPrice = cartCubit.totalPrice;
 
         return Scaffold(
           appBar: AppBar(
@@ -39,6 +38,8 @@ class CartScreen extends StatelessWidget {
                             book: book,
                             onRemoveTap: () =>
                                 cartCubit.removeBookFromCart(book),
+                            onIncrease: () => cartCubit.increaseQuantity(book),
+                            onDecrease: () => cartCubit.decreaseQuantity(book),
                             onTap: () => cartCubit.cartNavigator
                                 .navigateToBookDetail(book),
                           );

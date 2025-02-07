@@ -3,7 +3,7 @@
 import 'package:book_hub_lite/navigation/route_name.dart';
 import 'package:book_hub_lite/presentation/bottom_bar/bottom_bar.dart';
 import 'package:book_hub_lite/presentation/cart/cart_screen.dart';
-import 'package:book_hub_lite/presentation/cart/components/checkout_screen.dart';
+import 'package:book_hub_lite/presentation/cart/components/checkout/checkout_screen.dart';
 import 'package:book_hub_lite/presentation/cart/components/order_success.dart';
 import 'package:book_hub_lite/presentation/on_boarding/on_boarding_screen.dart';
 import 'package:book_hub_lite/presentation/read_book/read_book_screen.dart';
