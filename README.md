@@ -1,4 +1,3 @@
-```markdown
 # 📚 Book Hub Lite
 
 A modern, feature-rich book browsing and shopping application built with Flutter. Book Hub Lite offers an intuitive reading experience with seamless shopping integration.
