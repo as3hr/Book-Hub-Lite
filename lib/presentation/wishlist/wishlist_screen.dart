@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../di/service_locator.dart';
+import '../cart/cart_cubit.dart';
 import 'components/wishlist_book_container.dart';
 import 'wishlist_cubit.dart';
 import 'wishlist_state.dart';
@@ -10,6 +11,7 @@ class WishlistScreen extends StatelessWidget {
   const WishlistScreen({super.key});
 
   static final cubit = sl<WishlistCubit>();
+  static final cartCubit = sl<CartCubit>();
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +33,8 @@ class WishlistScreen extends StatelessWidget {
                     return WishlistBookContainer(
                       book: book,
                       onRemoveTap: () => cubit.removeBookFromWishlist(book),
+                      onTap: () =>
+                          cartCubit.cartNavigator.navigateToBookDetail(book),
                     );
                   },
                 ),

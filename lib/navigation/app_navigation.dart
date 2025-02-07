@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import '../di/service_locator.dart';
-
 class AppNavigation {
   static final navigatorKey = GlobalKey<NavigatorState>();
   static final context = navigatorKey.currentState!.context;
@@ -20,7 +18,6 @@ class AppNavigation {
 
   exitApp() async {
     SystemChannels.platform.invokeMethod('SystemNavigator.pop');
-    await sl.reset();
   }
 
   pushReplacement(String routeName, {arguments}) {
@@ -29,20 +26,6 @@ class AppNavigation {
       routeName,
       arguments: arguments,
     );
-  }
-
-  popAll(String routeName) {
-    sl.reset().then((_) {
-      ServiceLocator.configureServiceLocator();
-    }).then((_) {
-      if (context.mounted) {
-        Navigator.pushNamedAndRemoveUntil(
-          context,
-          routeName,
-          (Route<dynamic> route) => false,
-        );
-      }
-    });
   }
 
   getToLast() {

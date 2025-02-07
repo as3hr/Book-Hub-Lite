@@ -39,6 +39,8 @@ class CartScreen extends StatelessWidget {
                             book: book,
                             onRemoveTap: () =>
                                 cartCubit.removeBookFromCart(book),
+                            onTap: () => cartCubit.cartNavigator
+                                .navigateToBookDetail(book),
                           );
                         },
                       ),

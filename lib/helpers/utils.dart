@@ -14,14 +14,16 @@ List<T> parseList<T>(
 
 Future<void> showToast(String message) async {
   if (AppNavigation.context.mounted) {
-    showDialog(
+    await showDialog(
       context: AppNavigation.context,
       barrierColor: Colors.transparent,
       barrierDismissible: false,
       builder: (context) {
         Timer.periodic(const Duration(seconds: 2), (timer) {
-          Navigator.of(context, rootNavigator: true).pop('dialog');
           timer.cancel();
+          if (context.mounted) {
+            Navigator.of(context).pop();
+          }
         });
 
         return Dialog(
@@ -71,11 +73,12 @@ Future<bool> showConfirmationDialog(String title) async {
           return AlertDialog(
             contentPadding: const EdgeInsets.all(0),
             actionsPadding: const EdgeInsets.all(0),
-            backgroundColor: AppColor.primary,
+            backgroundColor: Colors.white,
             title: Text(title,
                 style: const TextStyle(
                   fontSize: 16,
-                  color: Colors.white,
+                  color: AppColor.primary,
+                  fontWeight: FontWeight.bold,
                 )),
             actions: [
               TextButton(
@@ -83,7 +86,8 @@ Future<bool> showConfirmationDialog(String title) async {
                 child: const Text('No',
                     style: TextStyle(
                       fontSize: 14,
-                      color: Colors.white,
+                      color: AppColor.primary,
+                      fontWeight: FontWeight.bold,
                     )),
               ),
               TextButton(
@@ -91,7 +95,8 @@ Future<bool> showConfirmationDialog(String title) async {
                 child: const Text('Yes',
                     style: TextStyle(
                       fontSize: 14,
-                      color: Colors.white,
+                      color: AppColor.primary,
+                      fontWeight: FontWeight.bold,
                     )),
               ),
             ],

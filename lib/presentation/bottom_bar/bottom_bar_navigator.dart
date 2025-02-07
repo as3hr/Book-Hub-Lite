@@ -8,10 +8,6 @@ class BottomBarNavigator {
     navigation.exitApp();
   }
 
-  void popAll() {
-    navigation.popAll(RouteName.splash);
-  }
-
   BottomBarNavigator(this.navigation);
 }
 
